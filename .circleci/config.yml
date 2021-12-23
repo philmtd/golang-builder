@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t ghcr.io/philmtd/golang-builder .
+      - run: docker build -t philmtd/golang-builder .
 
   release:
     docker:
@@ -14,11 +14,11 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t ghcr.io/philmtd/golang-builder:latest .
-      - run: docker tag ghcr.io/philmtd/golang-builder:latest ghcr.io/philmtd/golang-builder:$CIRCLE_TAG
-      - run: echo "$GHCR_PASSWORD" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
-      - run: docker push ghcr.io/philmtd/golang-builder:latest
-      - run: docker push ghcr.io/philmtd/golang-builder:$CIRCLE_TAG
+      - run: docker build -t philmtd/golang-builder:latest .
+      - run: docker tag philmtd/golang-builder:latest philmtd/golang-builder:$CIRCLE_TAG
+      - run: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run: docker push philmtd/golang-builder:latest
+      - run: docker push philmtd/golang-builder:$CIRCLE_TAG
 
 workflows:
   version: 2
@@ -30,7 +30,7 @@ workflows:
               only: /.*/
       - release:
           context:
-            - GHCR
+            - dockerhub
           filters:
             branches:
               ignore: /.*/
