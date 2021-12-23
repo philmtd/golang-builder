@@ -14,7 +14,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: cp ./circle-artifacts/o-neko-catnip .
       - run: docker build -t ghcr.io/philmtd/golang-builder:latest .
       - run: docker tag ghcr.io/philmtd/golang-builder:latest ghcr.io/philmtd/golang-builder:$CIRCLE_TAG
       - run: echo "$GHCR_PASSWORD" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
