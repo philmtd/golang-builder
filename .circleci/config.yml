@@ -1,0 +1,39 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: docker:19
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker build -t ghcr.io/philmtd/golang-builder .
+
+  release:
+    docker:
+      - image: docker:19
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: cp ./circle-artifacts/o-neko-catnip .
+      - run: docker build -t ghcr.io/philmtd/golang-builder:latest .
+      - run: docker tag ghcr.io/philmtd/golang-builder:latest ghcr.io/philmtd/golang-builder:$CIRCLE_TAG
+      - run: echo "$GHCR_PASSWORD" | docker login ghcr.io -u "$GHCR_USERNAME" --password-stdin
+      - run: docker push ghcr.io/philmtd/golang-builder:latest
+      - run: docker push ghcr.io/philmtd/golang-builder:$CIRCLE_TAG
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - release:
+          context:
+            - GHCR
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^[0-9]+(\.[0-9]+)*$/
