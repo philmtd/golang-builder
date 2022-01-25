@@ -1,4 +1,4 @@
-FROM golang:1.17.5-alpine
+FROM golang:1.17.6-alpine
 
 RUN apk add --no-cache bash make upx build-base git openssh ca-certificates && update-ca-certificates
 
@@ -8,4 +8,4 @@ RUN wget https://github.com/gotestyourself/gotestsum/releases/download/v1.7.0/go
     && chmod +x /bin/gotestsum \
     && rm -rf *.tar.gz
 
-RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.43.0
+RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.44.0
