@@ -1,7 +1,7 @@
-FROM golang:1.19-alpine
+FROM golang:1.20-alpine
 
-ENV GOTESTUM_VERSION "1.8.1"
-ENV GOLANGCI_LINT_VERSION "1.48.0"
+ENV GOTESTUM_VERSION "1.9.0"
+ENV GOLANGCI_LINT_VERSION "1.51.0"
 
 RUN apk add --no-cache bash make upx build-base git openssh ca-certificates && update-ca-certificates
 
