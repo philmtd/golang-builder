@@ -4,7 +4,7 @@ ENV GOTESTUM_VERSION "1.11.0"
 ENV GOLANGCI_LINT_VERSION "1.57.1"
 ENV MAGE_VERSION "1.15.0"
 
-RUN apk add --no-cache bash upx build-base git openssh ca-certificates && update-ca-certificates
+RUN apk add --no-cache bash upx build-base git openssh tar ca-certificates && update-ca-certificates
 
 RUN wget "https://github.com/gotestyourself/gotestsum/releases/download/v${GOTESTUM_VERSION}/gotestsum_${GOTESTUM_VERSION}_linux_amd64.tar.gz" \
     && tar -xvzf "gotestsum_${GOTESTUM_VERSION}_linux_amd64.tar.gz" \
