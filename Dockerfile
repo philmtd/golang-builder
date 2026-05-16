@@ -1,8 +1,8 @@
-FROM golang:1.22.1-alpine
+FROM golang:1.26.3-alpine
 
-ENV GOTESTUM_VERSION "1.11.0"
-ENV GOLANGCI_LINT_VERSION "1.57.1"
-ENV MAGE_VERSION "1.15.0"
+ENV GOTESTUM_VERSION "1.13.0"
+ENV GOLANGCI_LINT_VERSION "2.12.2"
+ENV MAGE_VERSION "1.17.2"
 
 RUN apk add --no-cache bash upx build-base git openssh tar ca-certificates && update-ca-certificates
 
