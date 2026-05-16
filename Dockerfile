@@ -12,7 +12,7 @@ RUN wget "https://github.com/gotestyourself/gotestsum/releases/download/v${GOTES
     && chmod +x /bin/gotestsum \
     && rm -rf *.tar.gz
 
-RUN wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s "v${GOLANGCI_LINT_VERSION}"
+RUN wget -O- -nv https://golangci-lint.run/install.sh | sh -s "v${GOLANGCI_LINT_VERSION}"
 
 RUN wget "https://github.com/magefile/mage/releases/download/v${MAGE_VERSION}/mage_${MAGE_VERSION}_Linux-64bit.tar.gz" \
     && tar -xvzf "mage_${MAGE_VERSION}_Linux-64bit.tar.gz" \
